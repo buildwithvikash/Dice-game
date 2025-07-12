@@ -1,6 +1,6 @@
 import Homepage from "./components/homepage";
 import Gamplay from "./components/Gamplay";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const App = () => {
   const [isgamestarted, setisgamestarted] = useState(false);

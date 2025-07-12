@@ -1,17 +1,52 @@
-import React from "react";
+import React, { useState } from "react";
 import Totalscore from "./Totalscore";
 import Dices from "./Dices";
 import Numberselect from "./Numberselect";
 
 function Gamplay() {
+  const [totalScore, setTotalScore] = useState(0);
+  const [error, setError] = useState("");
+  const [selectedNumber, setSelectedNumber] = useState();
+  const [currDice, setCurrDice] = useState(1);
+
+  const generateRandomNum = (max, min) => {
+    return Math.floor(Math.random() * (max - min) + min);
+  };
+
+  const rollDice = () => {
+    if (!selectedNumber) {
+      setError("You have not selected any numbe");
+      return;
+    }
+
+    const randomNumber = generateRandomNum(7, 1);
+    setCurrDice(randomNumber);
+
+    if (selectedNumber == randomNumber) {
+      setTotalScore((score) => {
+        score + randomNumber;
+      });
+    } else {
+      setTotalScore((score) => score - 2);
+    }
+
+    setTotalScore(undefined);
+
+  };
+
   return (
     <div className="flex flex-col">
       <div className="flex justify-between">
-        <Totalscore />
-        <Numberselect />
+        <Totalscore totalScore={totalScore} />
+        <Numberselect
+          error={error}
+          setError={setError}
+          selectedNumber={selectedNumber}
+          setSelectedNumber={setSelectedNumber}
+        />
       </div>
       <div>
-        <Dices />
+        <Dices rollDice = {rollDice} currDice = {currDice} />
       </div>
     </div>
   );
