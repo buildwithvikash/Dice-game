@@ -15,23 +15,21 @@ function Gamplay() {
 
   const rollDice = () => {
     if (!selectedNumber) {
-      setError("You have not selected any numbe");
+      setError("You have not selected any number");
       return;
     }
 
     const randomNumber = generateRandomNum(7, 1);
     setCurrDice(randomNumber);
 
+    console.log(`selectedNumber no.: ${selectedNumber}`);
+    console.log(`random number: ${randomNumber}`);
+
     if (selectedNumber == randomNumber) {
-      setTotalScore((score) => {
-        score + randomNumber;
-      });
+      setTotalScore((score) => score + randomNumber);
     } else {
       setTotalScore((score) => score - 2);
     }
-
-    setTotalScore(undefined);
-
   };
 
   return (
@@ -46,7 +44,11 @@ function Gamplay() {
         />
       </div>
       <div>
-        <Dices rollDice = {rollDice} currDice = {currDice} />
+        <Dices
+          rollDice={rollDice}
+          currDice={currDice}
+          setTotalScore={setTotalScore}
+        />
       </div>
     </div>
   );

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { assets } from "../assets/assets";
 import Rules from "./Rules";
 
-function Dices({ rollDice, currDice, resetScore }) {
+function Dices({ rollDice, currDice, setTotalScore }) {
   const [showrule, setshowrule] = useState(false);
   const [score, setScore] = useState(0);
 
@@ -11,7 +11,7 @@ function Dices({ rollDice, currDice, resetScore }) {
   };
 
   const resetScore = () => {
-    setScore(0);
+    setTotalScore(0);
   };
   return (
     <div className="flex flex-col justify-center items-center">
